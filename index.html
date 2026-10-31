@@ -125,7 +125,7 @@ footer{padding:2rem var(--pad);color:var(--mute);font-size:.9rem;display:flex;ju
 <label class="full" id="other-wrap" hidden>Describe the system you need<input id="other" placeholder="e.g. Barangay records system"></label>
 <label class="full">Project Description<textarea id="desc" required placeholder="What should the system do? Who will use it?"></textarea></label>
 <label class="full">Your Budget (optional, in ₱)<input id="budget" type="number" min="0" step="any" inputmode="decimal" placeholder="Enter your budget, e.g. 5000"><span class="note">Students are welcome. Tell us what you can afford and we will work within it.</span></label>
-<div class="full"><button class="btn fill" type="submit">Submit Inquiry</button><p class="note" style="margin-top:.8rem">There is no server connected yet. Submitting opens your email app with the inquiry filled in, and you send it from there.</p><p id="status" role="status"></p></div>
+<div class="full"><button class="btn fill" type="submit">Submit Inquiry</button><p class="note" style="margin-top:.8rem">Submitting opens Gmail with your inquiry filled in. Press Send in Gmail to deliver it to SystemCraft.</p><p id="status" role="status"></p></div>
 </form>
 </div></section>
 </main>
@@ -183,13 +183,16 @@ if(qs){$("sys-in").value=qs;toggleOther();$("type").value="Business Management S
 /* Mobile menu */
 $("menu").addEventListener("click",function(){var o=$("nav").classList.toggle("open");this.setAttribute("aria-expanded",o)});
 $("nav").addEventListener("click",function(e){if(e.target.tagName==="A"){$("nav").classList.remove("open");$("menu").setAttribute("aria-expanded","false")}});
-/* Inquiry form: no backend yet, so it opens the visitor's email app */
+/* Inquiry form: no backend yet, so it opens a Gmail draft addressed to CONTACT_EMAIL */
 $("f").addEventListener("submit",function(e){
   e.preventDefault();
   var g=function(i){return $(i).value.trim()};
   var body=["Name: "+g("name"),"Email: "+g("email"),"Business/Organization: "+g("org"),"Project Type: "+g("type"),"System Requested: "+sysValue(),"Budget: "+(g("budget")?"₱"+Number(g("budget")).toLocaleString("en-PH"):"Not specified"),"","Project Description:",g("desc")].join("\n");
-  location.href="mailto:"+CONTACT_EMAIL+"?subject="+encodeURIComponent("SystemCraft inquiry: "+(sysValue()||g("type")))+"&body="+encodeURIComponent(body);
-  $("status").textContent="Your email app should open. Nothing is sent until you press Send there.";
+  var subj=encodeURIComponent("SystemCraft inquiry: "+(sysValue()||g("type"))),enc=encodeURIComponent(body);
+  var gmail="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(CONTACT_EMAIL)+"&su="+subj+"&body="+enc;
+  var w=window.open(gmail,"_blank");
+  if(!w)location.href="mailto:"+CONTACT_EMAIL+"?subject="+subj+"&body="+enc;
+  $("status").textContent="Gmail should open in a new tab with your inquiry ready. Nothing is sent until you press Send there.";
 });
 </script>
 </body>
