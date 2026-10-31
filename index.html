@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SystemCraft – Custom Software, Websites and Business Systems</title>
+<meta name="description" content="SystemCraft builds modern websites, custom software and business management systems: inventory, POS, school, restaurant and HR systems.">
+<meta name="theme-color" content="#050505">
+<meta property="og:title" content="SystemCraft – We Build Smart Systems">
+<meta property="og:description" content="Modern websites and custom business systems that simplify operations and help businesses grow.">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"SystemCraft","description":"Software development and IT solutions: websites, custom software and business management systems."}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23050505'/%3E%3Cpath d='M62 30H42a12 12 0 000 24h16a12 12 0 010 24H36' fill='none' stroke='%2339ff6a' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap">
+<style>
+:root{--bg:#050505;--panel:#0d100e;--line:#1e2621;--ink:#f4f6f4;--mute:#a1aaa4;--g:#39ff6a;--glow:0 0 24px rgba(57,255,106,.28);--pad:clamp(1.25rem,5vw,4rem)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.65 Inter,system-ui,sans-serif}
+h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;margin:0;line-height:1.1}
+p{margin:0}a{color:inherit}
+:focus-visible{outline:3px solid var(--g);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:.5rem;background:var(--g);color:#000;padding:.5rem 1rem;z-index:99}.skip:focus{left:.5rem}
+header{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:.9rem var(--pad);background:rgba(5,5,5,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{font:700 1.25rem "Space Grotesk",sans-serif;text-decoration:none}.logo b{color:var(--g)}
+nav{display:flex;gap:1.4rem;align-items:center}
+nav a{text-decoration:none;color:var(--mute);font-size:.95rem}nav a:hover{color:var(--ink)}
+#menu{display:none;background:none;border:1px solid var(--line);color:var(--ink);border-radius:.5rem;padding:.45rem .8rem;font:inherit;cursor:pointer}
+.btn{display:inline-block;padding:.8rem 1.5rem;border-radius:.6rem;border:1px solid var(--g);font:700 .95rem "Space Grotesk",sans-serif;text-decoration:none;cursor:pointer;transition:.2s;background:transparent;color:var(--g)}
+.btn.fill{background:var(--g);color:#000}.btn:hover{box-shadow:var(--glow);transform:translateY(-2px)}
+.btn.sm{padding:.5rem 1rem;font-size:.85rem}
+section{padding:6rem var(--pad);border-bottom:1px solid var(--line)}
+.wrap{max-width:70rem;margin:0 auto}
+.kick{color:var(--g);font-size:.9rem;margin-bottom:.8rem}
+h2{font-size:clamp(2rem,4.5vw,3.2rem);letter-spacing:-.02em;margin-bottom:1rem}
+.sub{color:var(--mute);max-width:40rem;margin-bottom:3rem}
+.hero{min-height:100svh;display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding-top:8rem;background:radial-gradient(60rem 30rem at 85% 30%,rgba(57,255,106,.09),transparent 60%)}
+.hero h1{font-size:clamp(2.4rem,5.6vw,4.4rem);letter-spacing:-.03em}.hero h1 span{color:var(--g)}
+.hero p{color:var(--mute);font-size:1.15rem;max-width:34rem;margin:1.5rem 0 2rem}
+.btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.vis{border:1px solid var(--line);border-radius:1rem;background:var(--panel);box-shadow:var(--glow);padding:1rem}
+.vis svg{width:100%;height:auto;display:block}
+.grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:1rem;padding:1.5rem;display:flex;flex-direction:column;gap:.8rem;transition:.25s}
+.card:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-3px)}
+.card p{color:var(--mute);font-size:.95rem;flex:1}.card h3{font-size:1.15rem}
+.ico{width:2.8rem;height:2.8rem;border-radius:.7rem;border:1px solid var(--line);display:grid;place-items:center;color:var(--g)}
+.ico svg{width:1.4rem;height:1.4rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.tabs{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem}
+.tabs button{background:none;border:1px solid var(--line);color:var(--mute);padding:.6rem 1.1rem;border-radius:2rem;font:500 .95rem Inter,sans-serif;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--g);border-color:var(--g);color:#000}
+.shot{border-radius:.6rem;border:1px solid var(--line);overflow:hidden}
+.shot svg{display:block;width:100%;height:auto}
+.label{font-size:.8rem;color:#000;background:var(--g);align-self:flex-start;padding:.15rem .6rem;border-radius:2rem;font-weight:500}
+.tags{display:flex;gap:.4rem;flex-wrap:wrap}.tags span{font-size:.8rem;border:1px solid var(--line);border-radius:2rem;padding:.1rem .7rem;color:var(--mute)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;counter-reset:s}
+.steps .card::before{counter-increment:s;content:counter(s);font:700 2.2rem "Space Grotesk",sans-serif;color:var(--g)}
+form{display:grid;gap:1rem;grid-template-columns:1fr 1fr}
+.full{grid-column:1/-1}[hidden]{display:none!important}
+label{display:grid;gap:.4rem;font-size:.9rem;color:var(--mute)}
+input,select,textarea{background:var(--panel);border:1px solid var(--line);border-radius:.6rem;color:var(--ink);font:inherit;padding:.75rem .9rem}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--g);box-shadow:var(--glow)}
+textarea{min-height:8rem;resize:vertical}
+#status{color:var(--g);min-height:1.6rem}
+.note{font-size:.88rem;color:var(--mute)}
+footer{padding:2rem var(--pad);color:var(--mute);font-size:.9rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(max-width:860px){.hero,.two,.steps,form{grid-template-columns:1fr}#menu{display:block}nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;background:#050505;padding:1rem var(--pad);border-bottom:1px solid var(--line)}nav.open{display:flex}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+<a class="logo" href="#home">System<b>Craft</b></a>
+<button id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
+<nav id="nav" aria-label="Main"><a href="#about">About</a><a href="#services">Services</a><a href="#systems">Systems</a><a href="#projects">Projects</a><a href="#process">Process</a><a class="btn fill sm" href="#contact">Start a Project</a></nav>
+</header>
+<main id="main">
+<section class="hero" id="home">
+<div>
+<h1>We Build Smart Systems. <span>We Create Digital Solutions.</span></h1>
+<p>SystemCraft develops modern websites and custom business systems that help businesses simplify operations, improve productivity, and grow.</p>
+<div class="btns"><a class="btn fill" href="#services">Explore Our Services</a><a class="btn" href="#contact">Start a Project</a></div>
+</div>
+<div class="vis" aria-hidden="true"><svg viewBox="0 0 400 280"><rect x="0" y="0" width="400" height="28" rx="6" fill="#141a16"/><circle cx="16" cy="14" r="4" fill="#39ff6a"/><circle cx="30" cy="14" r="4" fill="#2a332d"/><circle cx="44" cy="14" r="4" fill="#2a332d"/><g fill="#1e2621"><rect x="0" y="40" width="90" height="240" rx="6"/></g><g fill="#39ff6a" opacity=".85"><rect x="12" y="54" width="60" height="8" rx="4"/></g><g fill="#2a332d"><rect x="12" y="76" width="50" height="6" rx="3"/><rect x="12" y="92" width="64" height="6" rx="3"/><rect x="12" y="108" width="44" height="6" rx="3"/></g><g fill="#141a16"><rect x="104" y="40" width="88" height="56" rx="6"/><rect x="204" y="40" width="88" height="56" rx="6"/><rect x="304" y="40" width="96" height="56" rx="6"/></g><g fill="#39ff6a"><rect x="116" y="56" width="40" height="8" rx="4"/><rect x="216" y="56" width="30" height="8" rx="4"/><rect x="316" y="56" width="48" height="8" rx="4"/></g><rect x="104" y="108" width="296" height="172" rx="6" fill="#141a16"/><path d="M120 250 L170 210 L220 226 L280 160 L340 176 L384 130" fill="none" stroke="#39ff6a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><g fill="#2a332d"><rect x="120" y="262" width="70" height="6" rx="3"/><rect x="210" y="262" width="50" height="6" rx="3"/></g></svg></div>
+</section>
+
+<section id="about"><div class="wrap">
+<p class="kick">About SystemCraft</p><h2>Reliable, practical digital solutions</h2>
+<p class="sub">SystemCraft focuses on building dependable software that fits how a business actually works. We start from your process, then design a system that is clear to use and easy to maintain.</p>
+<div class="two" style="margin-bottom:1.2rem"><div class="card"><h3>Our Mission</h3><p>To build digital tools that make everyday business work simpler, faster and more organised.</p></div><div class="card"><h3>Our Vision</h3><p>To be a trusted software partner for organisations that want practical, well-built systems.</p></div></div>
+<div class="grid" id="why"></div>
+</div></section>
+
+<section id="services"><div class="wrap">
+<p class="kick">Services</p><h2>What we do</h2><p class="sub">From a simple website to a full management system, we cover design, development and support.</p>
+<div class="grid" id="svc"></div>
+</div></section>
+
+<section id="systems"><div class="wrap">
+<p class="kick">Systems We Build</p><h2>Find the system your business needs</h2><p class="sub">Choose a category, then request the system you want. It will be filled in for you on the inquiry form.</p>
+<div class="tabs" role="tablist" aria-label="System categories" id="tabs"></div>
+<div class="grid" id="sys" role="tabpanel"></div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+<p class="kick">Projects</p><h2>Demo projects</h2><p class="sub">These are demo concepts and placeholders that show the kind of work we can build. They are not completed client projects.</p>
+<div class="grid" id="prj"></div>
+</div></section>
+
+<section id="process"><div class="wrap">
+<p class="kick">How It Works</p><h2>Four simple steps</h2><p class="sub">A clear process from first conversation to a working system.</p>
+<div class="steps" id="stp"></div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+<p class="kick">Contact</p><h2>Start a project</h2><p class="sub">Tell us what you need. Fields marked required help us understand your project.</p>
+<form id="f">
+<label>Full Name<input id="name" required autocomplete="name"></label>
+<label>Email Address<input id="email" type="email" required autocomplete="email"></label>
+<label class="full">Business or Organization<input id="org" autocomplete="organization"></label>
+<label>Project Type<select id="type" required><option value="">Select a type</option><option>Website Development</option><option>Custom Software Development</option><option>Business Management System</option><option>Database Design and Management</option><option>UI/UX Design</option><option>System Maintenance and Technical Support</option><option>Other</option></select></label>
+<label>System Requested<select id="sys-in"></select></label>
+<label class="full" id="other-wrap" hidden>Describe the system you need<input id="other" placeholder="e.g. Barangay records system"></label>
+<label class="full">Project Description<textarea id="desc" required placeholder="What should the system do? Who will use it?"></textarea></label>
+<label class="full">Your Budget (optional, in ₱)<input id="budget" type="number" min="0" step="any" inputmode="decimal" placeholder="Enter your budget, e.g. 5000"><span class="note">Students are welcome. Tell us what you can afford and we will work within it.</span></label>
+<div class="full"><button class="btn fill" type="submit">Submit Inquiry</button><p class="note" style="margin-top:.8rem">There is no server connected yet. Submitting opens your email app with the inquiry filled in, and you send it from there.</p><p id="status" role="status"></p></div>
+</form>
+</div></section>
+</main>
+<footer><span>© 2026 SystemCraft</span><span>Demo content is for illustration only.</span></footer>
+
+<script>
+/* Content lives in plain data so it can later come from a database/API (see README notes). */
+var CONTACT_EMAIL="choloquarteros@gmail.com"; /* change to your business email */
+var P={globe:"M12 2a10 10 0 100 20 10 10 0 000-20zM2 12h20M12 2c3 3 3 17 0 20M12 2c-3 3-3 17 0 20",code:"M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16",dash:"M3 3h8v8H3zM13 3h8v5h-8zM13 10h8v11h-8zM3 13h8v8H3z",db:"M4 6c0-2 16-2 16 0s-16 2-16 0v12c0 2 16 2 16 0V6M4 12c0 2 16 2 16 0",pen:"M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z",tool:"M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.8-3.8a6 6 0 01-7.9 7.9l-6.9 6.9a2.1 2.1 0 01-3-3l6.9-6.9a6 6 0 017.9-7.9z",biz:"M3 7h18v13H3zM9 7V4h6v3M3 13h18",food:"M5 3v8a2 2 0 002 2v8M9 3v8M7 3v8M17 3c-2 2-2 6 0 8v10",school:"M2 9l10-5 10 5-10 5zM6 11v5c3 3 9 3 12 0v-5",users:"M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8M22 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8",cube:"M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM17 13v7M13 16.5h7",star:"M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"};
+function ic(k){return '<div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="'+P[k]+'"/></svg></div>'}
+var WHY=[["star","Quality","Careful design and testing so the system works as expected."],["pen","Usability","Interfaces that staff and customers can pick up quickly."],["tool","Reliability","Maintainable code and support after delivery."],["code","Innovation","Modern tools applied to practical business problems."]];
+var SVC=[["globe","Website Development","Fast, responsive websites for businesses and organisations."],["code","Custom Software Development","Software built around your own process and requirements."],["dash","Business Management Systems","Tools to manage sales, stock, staff and reports in one place."],["db","Database Design and Management","Well-structured databases with secure, organised data handling."],["pen","UI/UX Design","Clear, accessible interfaces designed around real users."],["tool","System Maintenance and Technical Support","Updates, fixes and help to keep your system running smoothly."]];
+var CATS=[
+{n:"Business",i:"biz",t:"Business Management System",s:[["Inventory Management System","Track stock levels, suppliers and item movement."],["Point of Sale (POS) System","Process sales and print receipts at the counter."],["Sales and Reporting System","Review sales trends with clear summary reports."],["Business Management System","Manage daily operations from one dashboard."],["Customer Relationship Management (CRM)","Keep customer records, notes and follow-ups organised."]]},
+{n:"Restaurant",i:"food",t:"Business Management System",s:[["Restaurant Management System","Coordinate menus, staff, orders and daily sales."],["Order Management System","Take and track orders from table to payment."],["Table Reservation System","Let guests book tables and manage availability."],["Food Ordering System","Online menu and ordering for pickup or delivery."],["Kitchen Order Monitoring System","Show incoming orders and status to kitchen staff."]]},
+{n:"School",i:"school",t:"Business Management System",s:[["Student Information System","Store student records, grades and contact details."],["Enrollment Management System","Handle applications and enrollment in one flow."],["Attendance Monitoring System","Record and review student attendance."],["Library Management System","Catalogue books and manage borrowing and returns."],["Learning Management System","Host lessons, activities and assessments online."]]},
+{n:"Employee and HR",i:"users",t:"Business Management System",s:[["Employee Management System","Maintain employee profiles and records."],["Human Resource Management System","Manage HR processes from hiring to records."],["Payroll Management System","Compute pay, deductions and payslips."],["Employee Attendance System","Log time in and out and review attendance."],["Leave and Gate Pass Management System","Request and approve leave and gate passes."]]},
+{n:"Other Custom",i:"cube",t:"Custom Software Development",s:[["Appointment and Booking System","Let clients book and manage appointments."],["Document Management System","Store, find and share documents securely."],["Event Management System","Plan events, registrations and schedules."],["Property Management System","Track units, tenants, rent and maintenance."],["Custom Web-Based Application","A web app designed around your specific needs."]]}];
+var PRJ=[["Inventory Dashboard","Demo concept of a stock-tracking dashboard with low-stock alerts.",["HTML","CSS","JavaScript"],"inv","inventory.html"],["School Enrollment Portal","Demo concept of an online enrollment and student records flow.",["HTML","CSS","JavaScript"],"enr","enrollment.html"],["Restaurant Order Screen","Demo concept of a kitchen order monitor showing live order status.",["HTML","CSS","JavaScript"],"rst","restaurant.html"]];
+var G="#39ff6a",A="#ffb020",PN="#141a16",MU="#2a332d";
+function R(x,y,w,h,f,r){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+(r||4)+'" fill="'+f+'"/>'}
+function pill(x,y,w,c){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="10" rx="5" fill="none" stroke="'+c+'" stroke-width="1.5"/>'}
+function SV(b){return '<svg viewBox="0 0 300 150" role="img" aria-label="Preview of the demo screen">'+R(0,0,300,150,"#0a0d0b",0)+b+'</svg>'}
+var PV={
+inv:SV(R(10,10,86,34,PN,6)+R(107,10,86,34,PN,6)+R(204,10,86,34,PN,6)+R(18,18,34,8,G)+R(115,18,24,8,A)+R(212,18,40,8,G)+R(18,32,50,5,MU)+R(115,32,50,5,MU)+R(212,32,50,5,MU)+R(10,54,280,86,PN,6)+[66,86,106,126].map(function(y,i){return R(20,y,80,6,MU)+R(150,y,24,6,MU)+pill(226,y-2,48,i===1?A:G)}).join("")),
+enr:SV(R(10,10,110,130,PN,6)+R(20,22,60,6,G)+R(20,38,90,14,MU)+R(20,60,90,14,MU)+R(20,82,90,14,MU)+R(20,108,60,18,G,6)+R(130,10,160,130,PN,6)+[24,52,80,108].map(function(y,i){return R(140,y,56,6,MU)+R(140,y+10,34,5,"#1e2621")+pill(232,y-2,48,i===1||i===3?A:G)}).join("")),
+rst:SV([10,108,206].map(function(x,c){return R(x,10,84,130,PN,6)+R(x+8,18,40,7,c===0?A:G)+R(x+8,34,68,30,"#1e2621")+R(x+14,42,36,5,MU)+R(x+14,52,48,5,MU)+(c<2?R(x+8,72,68,30,"#1e2621")+R(x+14,80,30,5,MU)+R(x+14,90,50,5,MU):"")}).join(""))};
+var STP=[["Consultation","We learn about your business and what you need."],["Planning","We define the features and project requirements."],["Development","We design, build and test the system."],["Deployment","We deliver the finished system and provide support."]];
+var $=function(i){return document.getElementById(i)};
+$("why").innerHTML=WHY.map(function(w){return '<div class="card">'+ic(w[0])+'<h3>'+w[1]+'</h3><p>'+w[2]+'</p></div>'}).join("");
+$("svc").innerHTML=SVC.map(function(s){return '<div class="card">'+ic(s[0])+'<h3>'+s[1]+'</h3><p>'+s[2]+'</p></div>'}).join("");
+$("stp").innerHTML=STP.map(function(s){return '<div class="card"><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div>'}).join("");
+$("prj").innerHTML=PRJ.map(function(p,k){return '<div class="card"><div class="shot">'+PV[p[3]]+'</div><span class="label">Demo concept, not client work</span><h3>'+p[0]+'</h3><p>'+p[1]+'</p><div class="tags">'+p[2].map(function(t){return '<span>'+t+'</span>'}).join("")+'</div><a class="btn sm" href="'+p[4]+'">View Project</a></div>'}).join("");
+$("sys-in").innerHTML='<option value="">Select a system (optional)</option>'+CATS.map(function(c){return '<optgroup label="'+c.n+'">'+c.s.map(function(s){return '<option>'+s[0]+'</option>'}).join("")+'</optgroup>'}).join("")+'<option value="Other">Other (not listed)</option>';
+function toggleOther(){var o=$("sys-in").value==="Other";$("other-wrap").hidden=!o;$("other").required=o;if(o)$("other").focus()}
+$("sys-in").addEventListener("change",toggleOther);
+function sysValue(){return $("sys-in").value==="Other"?"Other: "+$("other").value.trim():$("sys-in").value}
+function showCat(k){
+  var c=CATS[k];
+  [].forEach.call($("tabs").children,function(b,j){b.setAttribute("aria-selected",j===k)});
+  $("sys").innerHTML=c.s.map(function(s){return '<div class="card">'+ic(c.i)+'<h3>'+s[0]+'</h3><p>'+s[1]+'</p><a class="btn sm" href="#contact" data-sys="'+s[0]+'" data-type="'+c.t+'">Request This System</a></div>'}).join("");
+}
+$("tabs").innerHTML=CATS.map(function(c,k){return '<button role="tab" type="button" aria-selected="false" data-k="'+k+'">'+c.n+'</button>'}).join("");
+$("tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(b)showCat(+b.dataset.k)});
+showCat(0);
+/* Request buttons: fill the form with the chosen system */
+document.addEventListener("click",function(e){
+  var a=e.target.closest("[data-sys]");if(!a)return;
+  $("sys-in").value=a.dataset.sys;toggleOther();$("type").value=a.dataset.type;
+  $("status").textContent="Selected: "+a.dataset.sys;
+});
+/* Prefill from a demo page link (?sys=...) */
+var qs=new URLSearchParams(location.search).get("sys");
+if(qs){$("sys-in").value=qs;toggleOther();$("type").value="Business Management System"}
+/* Mobile menu */
+$("menu").addEventListener("click",function(){var o=$("nav").classList.toggle("open");this.setAttribute("aria-expanded",o)});
+$("nav").addEventListener("click",function(e){if(e.target.tagName==="A"){$("nav").classList.remove("open");$("menu").setAttribute("aria-expanded","false")}});
+/* Inquiry form: no backend yet, so it opens the visitor's email app */
+$("f").addEventListener("submit",function(e){
+  e.preventDefault();
+  var g=function(i){return $(i).value.trim()};
+  var body=["Name: "+g("name"),"Email: "+g("email"),"Business/Organization: "+g("org"),"Project Type: "+g("type"),"System Requested: "+sysValue(),"Budget: "+(g("budget")?"₱"+Number(g("budget")).toLocaleString("en-PH"):"Not specified"),"","Project Description:",g("desc")].join("\n");
+  location.href="mailto:"+CONTACT_EMAIL+"?subject="+encodeURIComponent("SystemCraft inquiry: "+(sysValue()||g("type")))+"&body="+encodeURIComponent(body);
+  $("status").textContent="Your email app should open. Nothing is sent until you press Send there.";
+});
+</script>
+</body>
+</html>

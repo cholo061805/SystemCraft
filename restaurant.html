@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap"><link rel="stylesheet" href="demo.css"><title>Restaurant Order Screen Demo – SystemCraft</title><meta name="description" content="Demo concept of a kitchen order monitor showing live order status."></head><body>
+<div class="bar"><a class="logo" href="index.html">System<b>Craft</b></a><a class="back" href="index.html#projects">← Back to projects</a></div>
+<div class="banner">Demo concept with sample data. Not a client project. Nothing is saved.</div>
+<main>
+<div class="pagehead"><div class="hi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v8a2 2 0 002 2v8M9 3v8M7 3v8M17 3c-2 2-2 6 0 8v10"/></svg></div><div><h1>Restaurant Order Screen</h1><p class="lead">A kitchen view of incoming orders. Move each order from New to Preparing to Ready to Served. Orders waiting 10 minutes or more are marked late.</p></div></div>
+<div class="app"><div class="win" aria-hidden="true"><i></i><i></i><i></i><span>kitchen-demo</span><em id="clock"></em></div>
+<aside class="side"><strong>Kitchen Monitor</strong><h3>Order stages</h3><span class="dot w">New</span><span class="dot">Preparing</span><span class="dot n">Ready</span><span class="dot r">Late (10+ min)</span><div class="tip">Try it: turn on “Auto-add orders” to watch new tickets arrive.</div></aside>
+<div class="content">
+<div class="stats">
+<div class="stat"><div class="si"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div><b id="act">0</b><span>Active orders</span></div>
+<div class="stat r"><div class="si"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><b id="late">0</b><span>Late orders</span></div>
+<div class="stat"><div class="si"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></div><b id="srv">0</b><span>Served</span></div>
+<div class="stat w"><div class="si"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M4.2 7l2.6 1.5M17.2 15.5l2.6 1.5M4.2 17l2.6-1.5M17.2 8.5L19.8 7"/></svg></div><b id="avg">0</b><span>Avg wait (min)</span></div>
+</div>
+<div class="tools"><button id="add" type="button">Add sample order</button><label class="switch"><input id="auto" type="checkbox"> Auto-add orders</label></div>
+<div class="board" id="board"></div>
+</div></div>
+<div class="cta"><p>Want a system like this for your restaurant?</p><a class="btn" href="index.html?sys=Kitchen%20Order%20Monitoring%20System#contact">Request This System</a></div>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+var COL=["New","Preparing","Ready"],ACT=["Start preparing","Mark ready","Mark served"];
+var SAMPLES=[["2× Burger","1× Fries"],["1× Chicken Rice","2× Iced Tea"],["3× Pasta","1× Garlic Bread"],["2× Sinigang","2× Rice"],["1× Pizza","1× Soda"],["4× Siomai","2× Coffee"]];
+var id=104,served=0,timer=null,now=Date.now();
+var orders=[{id:101,t:"Table 4",i:["2× Burger","1× Fries"],s:1,at:now-14*60000},{id:102,t:"Table 2",i:["1× Chicken Rice","2× Iced Tea"],s:0,at:now-3*60000},{id:103,t:"Table 7",i:["3× Pasta","1× Garlic Bread"],s:2,at:now-8*60000}];
+function mins(o){return Math.max(0,Math.floor((Date.now()-o.at)/60000))}
+function isLate(o){return mins(o)>=10}
+function render(){
+  $("board").innerHTML=COL.map(function(c,s){
+    var l=orders.filter(function(o){return o.s===s});
+    return '<section class="col" aria-label="'+c+' orders"><div class="colh"><h2>'+c+'</h2><span class="badge'+(s===0?' w':'')+'">'+l.length+'</span></div>'+(l.map(function(o){
+      var late=isLate(o);
+      return '<article class="ticket'+(late?' late':'')+'"><header><b>#'+o.id+' · '+o.t+'</b>'+(late?'<span class="badge r">Late</span>':'')+'</header><ul>'+o.i.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ul><footer><span class="age">'+mins(o)+' min waiting</span><button class="sm'+(s===2?'':' o')+'" data-id="'+o.id+'">'+ACT[s]+'</button></footer></article>'}).join("")||'<p class="empty">No orders here.</p>')+'</section>';
+  }).join("");
+  var a=orders.length,w=orders.reduce(function(x,o){return x+mins(o)},0);
+  $("act").textContent=a;$("late").textContent=orders.filter(isLate).length;$("srv").textContent=served;$("avg").textContent=a?Math.round(w/a):0;
+  $("clock").textContent=new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+}
+function addOrder(){orders.push({id:id++,t:"Table "+(1+Math.floor(Math.random()*12)),i:SAMPLES[Math.floor(Math.random()*SAMPLES.length)],s:0,at:Date.now()});render()}
+$("board").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var o=orders.filter(function(x){return x.id===+b.dataset.id})[0];if(o.s===2){orders.splice(orders.indexOf(o),1);served++}else o.s++;render()});
+$("add").addEventListener("click",addOrder);
+$("auto").addEventListener("change",function(){clearInterval(timer);if(this.checked)timer=setInterval(function(){if(orders.length<12)addOrder()},8000)});
+render();setInterval(render,30000);
+</script></body></html>

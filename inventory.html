@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap"><link rel="stylesheet" href="demo.css"><title>Inventory Dashboard Demo – SystemCraft</title><meta name="description" content="Demo concept of a stock-tracking dashboard with low-stock alerts."></head><body>
+<div class="bar"><a class="logo" href="index.html">System<b>Craft</b></a><a class="back" href="index.html#projects">← Back to projects</a></div>
+<div class="banner">Demo concept with sample data. Not a client project. Nothing is saved.</div>
+<main>
+<div class="pagehead"><div class="hi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zM13 3h8v5h-8zM13 10h8v11h-8zM3 13h8v8H3z"/></svg></div><div><h1>Inventory Dashboard</h1><p class="lead">Adjust stock with + and −. Items at or below their minimum level are flagged as low stock.</p></div></div>
+<div class="app"><div class="win" aria-hidden="true"><i></i><i></i><i></i><span>inventory-demo</span><em>Sample data</em></div>
+<aside class="side"><strong>Inventory</strong><h3>Stock status</h3><span class="dot">In stock</span><span class="dot w">Low stock</span><h3>Stock level bar</h3><span>The bar fills as quantity rises above the minimum.</span><div class="tip">Try it: lower “Printer Paper” to see the alert change.</div></aside>
+<div class="content">
+<div class="stats">
+<div class="stat"><div class="si"><svg viewBox="0 0 24 24"><path d="M3 7h18v13H3zM9 7V4h6v3M3 13h18"/></svg></div><b id="tot">0</b><span>Items</span></div>
+<div class="stat w"><div class="si"><svg viewBox="0 0 24 24"><path d="M12 3l10 18H2zM12 10v5M12 18v.01"/></svg></div><b id="low">0</b><span>Low stock</span></div>
+<div class="stat"><div class="si"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM17 13v7M13 16.5h7"/></svg></div><b id="units">0</b><span>Total units</span></div>
+<div class="stat"><div class="si"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></div><b id="health">0%</b><span>Stock health</span></div>
+</div>
+<div class="alert" id="alert" hidden><span id="alertTxt"></span><button class="sm o" id="showLow" type="button">Show low stock</button></div>
+<div class="tools"><input id="q" class="grow" type="search" placeholder="Search items" aria-label="Search items"><div class="chips" id="chips"><button class="chip" data-f="all" aria-pressed="true" type="button">All</button><button class="chip" data-f="low" aria-pressed="false" type="button">Low stock</button><button class="chip" data-f="ok" aria-pressed="false" type="button">In stock</button></div></div>
+<div class="scroll"><table><thead><tr><th>Item</th><th>Quantity</th><th>Stock level</th><th>Minimum</th><th>Status</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+<form id="add" class="box tools"><label class="f grow">New item<input id="n" required placeholder="Item name"></label><label class="f">Quantity<input id="qty" type="number" min="0" required placeholder="0" style="width:6rem"></label><label class="f">Minimum<input id="min" type="number" min="0" required placeholder="0" style="width:6rem"></label><button type="submit" style="align-self:end">Add item</button></form>
+</div></div>
+<div class="cta"><p>Want a system like this for your business?</p><a class="btn" href="index.html?sys=Inventory%20Management%20System#contact">Request This System</a></div>
+</main>
+<div id="toast" role="status"></div>
+<script>
+var items=[{n:"Notebook A5",q:42,m:15},{n:"Ballpoint Pen (box)",q:8,m:10},{n:"Printer Paper (ream)",q:5,m:12},{n:"Stapler",q:20,m:5},{n:"Whiteboard Marker",q:3,m:10},{n:"Folder",q:60,m:20}],flt="all";
+var $=function(i){return document.getElementById(i)},tt;
+function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
+function toast(m){var t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},1800)}
+function render(){
+  var f=$("q").value.toLowerCase(),low=items.filter(function(x){return x.q<=x.m}).length;
+  var rows=items.map(function(x,i){
+    var isLow=x.q<=x.m;
+    if(x.n.toLowerCase().indexOf(f)<0||(flt==="low"&&!isLow)||(flt==="ok"&&isLow))return"";
+    var pct=Math.min(100,Math.round(x.q/Math.max(1,x.m*3)*100));
+    return '<tr><td><b>'+esc(x.n)+'</b></td><td><div class="qty"><button class="sm o" data-i="'+i+'" data-d="-1" aria-label="Decrease '+esc(x.n)+'">−</button><b>'+x.q+'</b><button class="sm o" data-i="'+i+'" data-d="1" aria-label="Increase '+esc(x.n)+'">+</button></div></td><td><div class="meter" aria-hidden="true"><span class="'+(isLow?'w':'')+'" style="width:'+pct+'%"></span></div></td><td>'+x.m+'</td><td><span class="badge'+(isLow?' w">Low stock':'">In stock')+'</span></td><td><button class="sm dng" data-i="'+i+'" data-d="x">Remove</button></td></tr>';
+  }).join("");
+  $("rows").innerHTML=rows||'<tr><td colspan="6" class="empty">No items match. Try a different search or filter.</td></tr>';
+  $("tot").textContent=items.length;$("low").textContent=low;
+  $("units").textContent=items.reduce(function(s,x){return s+x.q},0);
+  $("health").textContent=(items.length?Math.round((items.length-low)/items.length*100):100)+"%";
+  $("alert").hidden=!low;$("alertTxt").textContent=low+(low===1?" item is":" items are")+" at or below the minimum level. Time to restock.";
+  [].forEach.call($("chips").children,function(b){b.setAttribute("aria-pressed",b.dataset.f===flt)});
+}
+$("rows").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var i=+b.dataset.i;if(b.dataset.d==="x"){toast("Removed "+items[i].n);items.splice(i,1)}else items[i].q=Math.max(0,items[i].q+ +b.dataset.d);render()});
+$("q").addEventListener("input",render);
+$("chips").addEventListener("click",function(e){var b=e.target.closest("button");if(b){flt=b.dataset.f;render()}});
+$("showLow").addEventListener("click",function(){flt="low";render()});
+$("add").addEventListener("submit",function(e){e.preventDefault();var n=$("n").value.trim();items.push({n:n,q:+$("qty").value,m:+$("min").value});this.reset();render();toast("Added "+n)});
+render();
+</script></body></html>

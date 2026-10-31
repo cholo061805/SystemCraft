@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap"><link rel="stylesheet" href="demo.css"><title>School Enrollment Portal Demo – SystemCraft</title><meta name="description" content="Demo concept of an online enrollment and student records flow."></head><body>
+<div class="bar"><a class="logo" href="index.html">System<b>Craft</b></a><a class="back" href="index.html#projects">← Back to projects</a></div>
+<div class="banner">Demo concept with sample data. Not a client project. Nothing is saved.</div>
+<main>
+<div class="pagehead"><div class="hi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5zM6 11v5c3 3 9 3 12 0v-5"/></svg></div><div><h1>School Enrollment Portal</h1><p class="lead">Submit an enrollment, then approve it in the records list. New applications start as Pending.</p></div></div>
+<div class="app"><div class="win" aria-hidden="true"><i></i><i></i><i></i><span>enrollment-demo</span><em>Sample data</em></div>
+<aside class="side"><strong>Enrollment</strong><h3>Application flow</h3><span class="dot n">1. Submit form</span><span class="dot w">2. Pending review</span><span class="dot">3. Enrolled</span><div class="tip">Try it: add a student, then press Approve.</div></aside>
+<div class="content">
+<div class="stats">
+<div class="stat"><div class="si"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8M22 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></svg></div><b id="tot">0</b><span>Applications</span></div>
+<div class="stat w"><div class="si"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><b id="pen">0</b><span>Pending</span></div>
+<div class="stat"><div class="si"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></div><b id="enr">0</b><span>Enrolled</span></div>
+</div>
+<div class="box"><div class="tools" style="justify-content:space-between;margin-bottom:.6rem"><b>Enrollment progress</b><span id="pct" class="age"></span></div><div class="meter big" aria-hidden="true"><span id="bar" style="width:0"></span></div></div>
+<form id="add" class="box"><h3 style="margin-bottom:1rem">New enrollment</h3><div class="tools"><label class="f grow">Student full name<input id="n" required placeholder="e.g. Ana Reyes"></label><label class="f">Grade level<select id="c"><option>Grade 7</option><option>Grade 8</option><option>Grade 9</option><option>Grade 10</option><option>Grade 11</option><option>Grade 12</option></select></label><label class="f grow">Guardian name<input id="g" required placeholder="e.g. Maria Reyes"></label><button type="submit" style="align-self:end">Submit enrollment</button></div></form>
+<div class="tools"><input id="q" class="grow" type="search" placeholder="Search students" aria-label="Search students"><div class="chips" id="chips"><button class="chip" data-f="all" aria-pressed="true" type="button">All</button><button class="chip" data-f="Pending" aria-pressed="false" type="button">Pending</button><button class="chip" data-f="Enrolled" aria-pressed="false" type="button">Enrolled</button></div><button class="sm o" id="all" type="button">Approve all pending</button></div>
+<div class="scroll"><table><thead><tr><th>Student</th><th>Grade</th><th>Guardian</th><th>Status</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+</div></div>
+<div class="cta"><p>Want a system like this for your school?</p><a class="btn" href="index.html?sys=Enrollment%20Management%20System#contact">Request This System</a></div>
+</main>
+<div id="toast" role="status"></div>
+<script>
+var st=[{n:"Maria Santos",c:"Grade 7",g:"Ana Santos",s:"Enrolled"},{n:"Juan Dela Cruz",c:"Grade 9",g:"Pedro Dela Cruz",s:"Pending"},{n:"Liza Reyes",c:"Grade 11",g:"Carla Reyes",s:"Pending"}],flt="all";
+var $=function(i){return document.getElementById(i)},tt;
+function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
+function ini(n){return n.split(/\s+/).slice(0,2).map(function(w){return w.charAt(0).toUpperCase()}).join("")}
+function toast(m){var t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},1800)}
+function render(){
+  var f=$("q").value.toLowerCase();
+  var rows=st.map(function(x,i){
+    if(x.n.toLowerCase().indexOf(f)<0||(flt!=="all"&&x.s!==flt))return"";
+    return '<tr><td><div class="who"><span class="av" aria-hidden="true">'+esc(ini(x.n))+'</span><b>'+esc(x.n)+'</b></div></td><td>'+x.c+'</td><td>'+esc(x.g)+'</td><td><span class="badge'+(x.s==="Pending"?' w':'')+'">'+x.s+'</span></td><td>'+(x.s==="Pending"?'<button class="sm" data-i="'+i+'" data-a="ok">Approve</button> ':'')+'<button class="sm dng" data-i="'+i+'" data-a="rm">Remove</button></td></tr>';
+  }).join("");
+  $("rows").innerHTML=rows||'<tr><td colspan="5" class="empty">No students found. Add one with the form above.</td></tr>';
+  var p=st.filter(function(x){return x.s==="Pending"}).length,e=st.length-p,pc=st.length?Math.round(e/st.length*100):0;
+  $("tot").textContent=st.length;$("pen").textContent=p;$("enr").textContent=e;
+  $("bar").style.width=pc+"%";$("pct").textContent=pc+"% of applications enrolled";
+  $("all").disabled=!p;
+  [].forEach.call($("chips").children,function(b){b.setAttribute("aria-pressed",b.dataset.f===flt)});
+}
+$("rows").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var i=+b.dataset.i;if(b.dataset.a==="ok"){st[i].s="Enrolled";toast(st[i].n+" is now enrolled")}else{toast("Removed "+st[i].n);st.splice(i,1)}render()});
+$("q").addEventListener("input",render);
+$("chips").addEventListener("click",function(e){var b=e.target.closest("button");if(b){flt=b.dataset.f;render()}});
+$("all").addEventListener("click",function(){st.forEach(function(x){x.s="Enrolled"});toast("All pending applications approved");render()});
+$("add").addEventListener("submit",function(e){e.preventDefault();var n=$("n").value.trim();st.unshift({n:n,c:$("c").value,g:$("g").value.trim(),s:"Pending"});$("n").value="";$("g").value="";render();toast(n+" submitted as Pending")});
+render();
+</script></body></html>
